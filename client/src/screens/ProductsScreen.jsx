@@ -1,25 +1,23 @@
 import { Box, Center, Wrap, WrapItem } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../redux/actions/productActions';
 
 const ProductsScreen = () => {
-	const [data, setData] = useState([]);
+	const dispatch = useDispatch();
+	const { loading, error, products, pagination } = useSelector(
+		(state) => state.product
+	);
 
 	useEffect(() => {
-		axios
-			.get('/api/products')
-			.then((response) => {
-				setData(response.data.products);
-			})
-			.catch((error) => {
-				console.log('Error fetching data:', error);
-			});
-	}, []);
+		dispatch(getProducts());
+	}, [dispatch]);
 
 	return (
 		<>
-			{data.length > 1 && (
+			{products.length > 1 && (
 				<Box>
 					<Wrap
 						spacing='30px'
@@ -27,10 +25,10 @@ const ProductsScreen = () => {
 						minHeight='80vh'
 						mx={{ base: '12', md: '20', lg: '32' }}
 					>
-						{data.map((product) => (
+						{products.map((product) => (
 							<WrapItem key={product._id}>
 								<Center w='250px' h='450px'>
-									<ProductCard product={product} loading={false} />
+									<ProductCard product={product} loading={loading} />
 								</Center>
 							</WrapItem>
 						))}
