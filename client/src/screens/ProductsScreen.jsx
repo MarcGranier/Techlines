@@ -1,5 +1,5 @@
 import { Box, Center, Wrap, WrapItem } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ const ProductsScreen = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getProducts());
+		dispatch(getProducts(1));
 	}, [dispatch]);
 
 	return (
