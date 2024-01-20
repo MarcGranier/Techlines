@@ -14,7 +14,7 @@ export const addCartItem = (id, qty) => async (dispatch) => {
 	try {
 		const { data } = await axios.get(`/api/products/${id}`);
 		const itemToAdd = {
-			id: data.id,
+			id: data._id,
 			name: data.name,
 			subtitle: data.subtitle,
 			image: data.images[0],
