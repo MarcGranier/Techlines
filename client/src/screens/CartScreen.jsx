@@ -73,7 +73,6 @@ const CartScreen = () => {
 						</Stack>
 						<Flex direction='column' align='center' flex='1'>
 							<OrderSummary />
-
 							<HStack mt='6' fontWeight='semibold'>
 								<p>or</p>
 								<Link
