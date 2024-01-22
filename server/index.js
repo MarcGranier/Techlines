@@ -7,6 +7,7 @@ import colors from 'colors';
 
 // Routes
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dbConnect();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 const port = process.env.PORT;
 
