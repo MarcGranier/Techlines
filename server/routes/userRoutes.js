@@ -2,6 +2,7 @@ import express from 'express';
 import User from '../models/User.js';
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
+import { sendVerificationEmail } from '../middleware/sendVerificationEmail.js';
 
 const userRoutes = express.Router();
 
@@ -52,6 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
 	});
 
 	const newToken = genToken(user._id);
+
+	sendVerificationEmail(newToken, email, name, user._id);
 
 	if (user) {
 		res.status(201).json({
