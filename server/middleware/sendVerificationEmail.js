@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export const sendVerificationEmail = (token, email, name, id) => {
+export const sendVerificationEmail = (token, email, name) => {
 	const html = `
   <html>
     <body>
@@ -12,11 +12,13 @@ export const sendVerificationEmail = (token, email, name, id) => {
   </html>
   `;
 
+	const appPass = process.env.APP_PASSWORD;
+
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
 			user: 'marcgranier969@gmail.com',
-			pass: process.env.APP_PASSWORD,
+			pass: appPass,
 		},
 	});
 
