@@ -38,3 +38,5 @@ const PasswordForgotten = () => {
 		</>
 	);
 };
+
+export default PasswordForgotten;

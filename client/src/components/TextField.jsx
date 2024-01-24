@@ -4,7 +4,7 @@ import {
 	FormErrorMessage,
 } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
-import { Field, useField } from 'formik';
+import { Field, useField } from 'Formik';
 
 const TextField = ({ label, type, name, placeholder }) => {
 	const [field, meta] = useField({ type, name, placeholder });
