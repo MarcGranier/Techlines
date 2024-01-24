@@ -4,7 +4,7 @@ import {
 	FormErrorMessage,
 } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
-import { Field, useField } from 'Formik';
+import { Field, useField } from 'formik';
 import { useState } from 'react';
 import { InputRightElement, Button, InputGroup } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';

@@ -1,8 +1,8 @@
 import {
 	Alert,
-	AlertTitle,
 	AlertDescription,
 	AlertIcon,
+	AlertTitle,
 	Box,
 	Button,
 	Container,
@@ -11,25 +11,24 @@ import {
 	Heading,
 	Stack,
 	Text,
-	UseToast,
 	useToast,
 } from '@chakra-ui/react';
-import { Formik } from 'Formik';
-import { useState, useEffect } from 'react';
+import { Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Lick as ReactLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link as ReactLink, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import PasswordField from '../components/PasswordField';
-import PasswordForgottenbForm from '../components/PasswordForgottenForm';
+import PasswordForgottenForm from '../components/PasswordForgottenForm';
 import TextField from '../components/TextField';
 import { login } from '../redux/actions/userActions';
 
-const LogInScreen = () => {
+const LoginScreen = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const redirect = '/products';
-	const toast = useToast;
+	const toast = useToast();
 
 	const { loading, error, userInfo, serverMsg } = useSelector(
 		(state) => state.user
@@ -176,4 +175,4 @@ const LogInScreen = () => {
 	);
 };
 
-export default LogInScreen;
+export default LoginScreen;
