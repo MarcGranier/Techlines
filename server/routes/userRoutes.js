@@ -137,6 +137,6 @@ userRoutes.route('/login').post(loginUser);
 userRoutes.route('/register').post(registerUser);
 userRoutes.route('/verify-email').get(verifyEmail);
 userRoutes.route('/password-reset-request').post(passwordResetRequest);
-userRoutes.route(password - reset).post(passwordReset);
+userRoutes.route('/password - reset').post(passwordReset);
 
 export default userRoutes;
