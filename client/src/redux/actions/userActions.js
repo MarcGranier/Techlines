@@ -80,14 +80,12 @@ export const verifyEmail = (token) => async (dispatch) => {
 			},
 		};
 
-		const { data } = await axios.post(
-			'/api/users/register',
-			{ email, password },
-			config
-		);
+		await axios.get(`/api/users/verify-email`, config);
 
-		dispatch(userLogin(data));
-		localStorage.setItem('userInfo', JSON.stringify(data));
+		dispatch(verificationEmail());
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		userInfo.active = true;
+		localStorage.setItem('userinfo', JSON.stringify(userInfo));
 	} catch (error) {
 		dispatch(
 			setError(
@@ -99,4 +97,63 @@ export const verifyEmail = (token) => async (dispatch) => {
 			)
 		);
 	}
+};
+
+export const sendResetEmail = (email) => async (dispatch) => {
+	dispatch(setLoading(true));
+	try {
+		const config = { headers: { 'Content-Type': 'application/json' } };
+
+		const { data, status } = await axios.post(
+			`/api/users/password-reset-request`,
+			{ email },
+			config
+		);
+
+		dispatch(setServerResponseMsg(data));
+	} catch (error) {
+		dispatch(
+			setError(
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message
+					? error.message
+					: 'An expected error has occurred. Please try again later.'
+			)
+		);
+	}
+};
+
+export const resetPassword = (password, token) => async (dispatch) => {
+	dispatch(setLoading(true));
+	try {
+		const config = {
+			headers: {
+				Authorization: `Bearer${token}`,
+				'Content-Type': 'application/json',
+			},
+		};
+
+		const { data, status } = await axios.post(
+			`/api/users/password-reset`,
+			{ password },
+			config
+		);
+		dispatch(setServerResponseMsg(data, status));
+		dispatch(setServerResponseStatus(status));
+	} catch (error) {
+		dispatch(
+			setError(
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message
+					? error.message
+					: 'An expected error has occurred. Please try again later.'
+			)
+		);
+	}
+};
+
+export const resetState = () => async (dispatch) => {
+	dispatch(stateReset());
 };

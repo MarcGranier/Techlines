@@ -6,6 +6,7 @@ import LandingScreen from './screens/LandingScreen';
 import ProductScreen from './screens/ProductScreen';
 import Footer from './components/Footer';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LogInScreen';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 						<Route path='/' element={<LandingScreen />} />
 						<Route path='/product/:id' element={<ProductScreen />} />
 						<Route path='/cart' element={<CartScreen />} />
+						<Route path='/login' element={<LoginScreen />} />
 					</Routes>
 				</main>
 				<Footer />
