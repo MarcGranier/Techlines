@@ -16,7 +16,7 @@ export const userSlice = createSlice({
 			state.loading = true;
 		},
 		userLogin: (state, { payload }) => {
-			state.userinfo = payload;
+			state.userInfo = payload;
 			state.error = null;
 			state.loading = false;
 		},
@@ -26,11 +26,11 @@ export const userSlice = createSlice({
 			state.userInfo = null;
 		},
 		setError: (state, { payload }) => {
-			state.loading = false;
 			state.error = payload;
+			state.loading = false;
 		},
 		verificationEmail: (state) => {
-			state.userinfo && (state.userInfo.active = true);
+			state.userInfo && (state.userInfo.active = true);
 			state.loading = false;
 			state.error = null;
 		},

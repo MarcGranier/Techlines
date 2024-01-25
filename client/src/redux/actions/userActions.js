@@ -13,6 +13,7 @@ import {
 import { clearCart } from '../slices/cart';
 
 export const login = (email, password) => async (dispatch) => {
+	dispatch(setLoading(true));
 	try {
 		const config = { headers: { 'Content-Type': 'application/json' } };
 
@@ -37,21 +38,21 @@ export const login = (email, password) => async (dispatch) => {
 	}
 };
 
-export const Logout = () => (dispatch) => {
+export const logout = () => (dispatch) => {
 	localStorage.removeItem('userInfo');
 	localStorage.removeItem('cartItems');
 	dispatch(clearCart());
-	dispatch(userLogout);
+	dispatch(userLogout());
 };
 
-export const register = (email, password) => async (dispatch) => {
+export const register = (name, email, password) => async (dispatch) => {
 	dispatch(setLoading(true));
 	try {
 		const config = { headers: { 'Content-Type': 'application/json' } };
 
 		const { data } = await axios.post(
-			'/api/users/register',
-			{ email, password },
+			'api/users/register',
+			{ name, email, password },
 			config
 		);
 
@@ -75,7 +76,7 @@ export const verifyEmail = (token) => async (dispatch) => {
 	try {
 		const config = {
 			headers: {
-				Authorization: `Bearer${token}`,
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
 		};
@@ -85,7 +86,7 @@ export const verifyEmail = (token) => async (dispatch) => {
 		dispatch(verificationEmail());
 		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 		userInfo.active = true;
-		localStorage.setItem('userinfo', JSON.stringify(userInfo));
+		localStorage.setItem('userInfo', JSON.stringify(userInfo));
 	} catch (error) {
 		dispatch(
 			setError(
@@ -111,6 +112,7 @@ export const sendResetEmail = (email) => async (dispatch) => {
 		);
 
 		dispatch(setServerResponseMsg(data));
+		dispatch(setServerResponseStatus(status));
 	} catch (error) {
 		dispatch(
 			setError(
@@ -129,7 +131,7 @@ export const resetPassword = (password, token) => async (dispatch) => {
 	try {
 		const config = {
 			headers: {
-				Authorization: `Bearer${token}`,
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
 		};
