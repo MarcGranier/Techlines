@@ -18,7 +18,7 @@ export const login = (email, password) => async (dispatch) => {
 		const config = { headers: { 'Content-Type': 'application/json' } };
 
 		const { data } = await axios.post(
-			'/api/users/login',
+			'api/users/login',
 			{ email, password },
 			config
 		);
@@ -85,8 +85,10 @@ export const verifyEmail = (token) => async (dispatch) => {
 
 		dispatch(verificationEmail());
 		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-		userInfo.active = true;
-		localStorage.setItem('userInfo', JSON.stringify(userInfo));
+		if (userInfo) {
+			userInfo.active = true;
+			localStorage.setItem('userInfo', JSON.stringify(userInfo));
+		}
 	} catch (error) {
 		dispatch(
 			setError(
