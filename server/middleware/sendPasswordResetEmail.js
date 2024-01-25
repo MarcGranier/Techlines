@@ -16,13 +16,13 @@ export const sendPasswordResetEmail = (token, email, name) => {
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
-			user: 'marcgranier969@gmail.com',
+			user: 'techlines03@gmail.com',
 			pass: appPass,
 		},
 	});
 
 	const mailOptions = {
-		from: 'marcgranier969@gmail.com',
+		from: 'techlines03@gmail.com',
 		to: email,
 		subject: 'Tech Lines:  Reset your password request',
 		html: html,
