@@ -9,8 +9,21 @@ import {
 	Text,
 	useColorModeValue as mode,
 	useDisclosure,
+	AlertDescription,
+	Alert,
+	AlertIcon,
+	AlertTitle,
+	Divider,
+	Image,
+	Menu,
+	MenuButton,
+	MenuDivider,
+	MenuItem,
+	MenuList,
+	Spacer,
+	useToast,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPhoneFlip } from 'react-icons/bs';
 import { Link as ReactLink } from 'react-router-dom';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
@@ -18,9 +31,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorites } from '../redux/actions/productActions';
 import NavLink from './NavLink';
 import ColorModeToggle from './ColorModeToggle';
-import { BiUserCheck } from 'react-icons/bi';
+import { BiUserCheck, BiLogInCircle } from 'react-icons/bi';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { TbShoppingCart } from 'react-icons/tb';
+import { logout } from '../redux/actions/userActions';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 
 const Links = [
 	{ name: 'Products', route: '/products' },
@@ -34,6 +49,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const { favoritesToggled } = useSelector((state) => state.product);
 	const { cartItems } = useSelector((state) => state.cart);
+	const { userInfo } = useSelector((state) => state.user);
 
 	useEffect(() => {}, [favoritesToggled, dispatch]);
 
