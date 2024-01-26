@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-	setUserOrders,
 	setError,
 	setLoading,
 	setServerResponseStatus,

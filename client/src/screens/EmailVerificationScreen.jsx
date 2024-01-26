@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link as ReactLink } from 'react-router-dom';
 import { verifyEmail } from '../redux/actions/userActions';
-import { useDispatch, UseSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	AbsoluteCenter,
 	Box,
@@ -17,7 +17,7 @@ import {
 const EmailVerificationScreen = () => {
 	const { token } = useParams();
 	const dispatch = useDispatch();
-	const { userInfo, error, loading } = UseSelector((state) => state.user);
+	const { error, loading } = useSelector((state) => state.user);
 
 	useEffect(() => {
 		dispatch(verifyEmail(token));
