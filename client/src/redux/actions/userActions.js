@@ -142,6 +142,7 @@ export const resetPassword = (password, token) => async (dispatch) => {
 			{ password },
 			config
 		);
+		console.log(data, status);
 		dispatch(setServerResponseMsg(data, status));
 		dispatch(setServerResponseStatus(status));
 	} catch (error) {
@@ -151,7 +152,7 @@ export const resetPassword = (password, token) => async (dispatch) => {
 					? error.response.data.message
 					: error.message
 					? error.message
-					: 'An expected error has occurred. Please try again later.'
+					: 'An expected error has occured. Please try again later.'
 			)
 		);
 	}

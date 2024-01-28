@@ -1,12 +1,12 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import ProductsScreen from './screens/ProductsScreen';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import LandingScreen from './screens/LandingScreen';
 import ProductScreen from './screens/ProductScreen';
 import Footer from './components/Footer';
 import CartScreen from './screens/CartScreen';
-import LoginScreen from './screens/LogInScreen';
+import LoginScreen from './screens/LoginScreen';
 import EmailVerificationScreen from './screens/EmailVerificationScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
 
