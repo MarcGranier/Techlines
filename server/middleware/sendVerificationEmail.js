@@ -16,13 +16,13 @@ export const sendVerificationEmail = (token, email, name) => {
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
-			user: 'benstechlines1@gmail.com',
+			user: 'techlines03@gmail.com',
 			pass: 'vnch hliv npcv divl',
 		},
 	});
 
 	const mailOptions = {
-		from: 'benstechlines1@gmail.com',
+		from: 'techlines03@gmail.com',
 		to: email,
 		subject: 'Verify your email address',
 		html: html,
