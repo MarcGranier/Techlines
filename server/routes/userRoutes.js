@@ -135,9 +135,10 @@ const passwordReset = asyncHandler(async (req, res) => {
 	}
 });
 
-// google login
+//google login
 const googleLogin = asyncHandler(async (req, res) => {
 	const { googleId, email, name, googleImage } = req.body;
+	console.log(googleId, email, name, googleImage);
 
 	try {
 		const user = await User.findOne({ googleId: googleId });
@@ -181,7 +182,7 @@ const googleLogin = asyncHandler(async (req, res) => {
 			});
 		}
 	} catch (error) {
-		res.status(404).send('Something went wrong.  Please try again later');
+		res.status(404).send('Something went wrong, please try again later.');
 	}
 });
 
@@ -190,5 +191,6 @@ userRoutes.route('/register').post(registerUser);
 userRoutes.route('/verify-email').get(verifyEmail);
 userRoutes.route('/password-reset-request').post(passwordResetRequest);
 userRoutes.route('/password-reset').post(passwordReset);
+userRoutes.route('/google-login').post(googleLogin);
 
 export default userRoutes;
