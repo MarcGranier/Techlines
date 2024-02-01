@@ -12,7 +12,7 @@ const genToken = (id) => {
 	return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '60d' });
 };
 
-//login
+// login
 const loginUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
@@ -38,7 +38,7 @@ const loginUser = asyncHandler(async (req, res) => {
 	}
 });
 
-//register
+// register
 const registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
 
@@ -78,45 +78,32 @@ const registerUser = asyncHandler(async (req, res) => {
 	}
 });
 
-//verifyEmail
+// verify email
 const verifyEmail = asyncHandler(async (req, res) => {
-	const token = req.headers.authorization.split(' ')[1];
-	try {
-		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-		const user = await User.findById(decoded.id);
-		console.log(token);
-
-		if (user) {
-			user.active = true;
-			await user.save();
-			res.json(
-				'Thanks for activating your account. You can close this window now.'
-			);
-		} else {
-			res.status(404).send('User not found.');
-		}
-	} catch (error) {
-		res.status(401).send('Email address could not be verified.');
-	}
+	const user = req.user;
+	user.active = true;
+	await user.save();
+	res.json(
+		'Thanks for activating your account. You can close this window now.'
+	);
 });
 
-//password reset request
+// password reset request
 const passwordResetRequest = asyncHandler(async (req, res) => {
 	const { email } = req.body;
 	try {
 		const user = await User.findOne({ email: email });
-
 		if (user) {
 			const newToken = genToken(user._id);
 			sendPasswordResetEmail(newToken, user.email, user.name);
-			res.status(200).send(`We have  sent you a recovery email to ${email}`);
+			res.status(200).send(`We have send you a recover email to ${email}`);
 		}
 	} catch (error) {
-		res.status(401).send('There is not an account with that email address');
+		res.status(401).send('There is not account with such an email address');
 	}
 });
 
-//password reset
+// password reset
 const passwordReset = asyncHandler(async (req, res) => {
 	const token = req.headers.authorization.split(' ')[1];
 	try {
@@ -126,19 +113,18 @@ const passwordReset = asyncHandler(async (req, res) => {
 		if (user) {
 			user.password = req.body.password;
 			await user.save();
-			res.json('Your password has been updated successfully');
+			res.json('Your password has been updated successfully.');
 		} else {
 			res.status(404).send('User not found.');
 		}
 	} catch (error) {
-		res.status(401).send('Password reset failed');
+		res.status(401).send('Password reset failed.');
 	}
 });
 
 //google login
 const googleLogin = asyncHandler(async (req, res) => {
 	const { googleId, email, name, googleImage } = req.body;
-	console.log(googleId, email, name, googleImage);
 
 	try {
 		const user = await User.findOne({ googleId: googleId });
