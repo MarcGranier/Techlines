@@ -37,7 +37,7 @@ function App() {
 			/>
 		</VStack>
 	) : (
-		<GoogleOAuthProvider clientId={googleClient}>
+		<GoogleOAuthProvider clientId={process.env.GOGGLE_CLIENT_ID}>
 			<ChakraProvider>
 				<Router>
 					<Header />
